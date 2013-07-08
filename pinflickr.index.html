@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pinterest-Like Layout + Flickr API</title>
+	
+	<!--// get stylesheets //-->
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<!--// get jquery //-->
+	<script src="js/jquery-1.10.2.min.js"></script>
+
+	<!--// get masonry //-->
+	<script src="js/masonry.min.js"></script>
+<script>
+// http://masonry.desandro.com/masonry.pkgd.js added as external resource
+// https://rawgithub.com/desandro/classie/master/classie.js added
+
+docReady( function() {
+
+  var container = document.querySelector('.masonry');
+  var msnry = new Masonry( container, {
+    columnWidth: 60
+  });
+
+  eventie.bind( container, 'click', function( event ) {
+    // don't proceed if item was not clicked on
+    if ( !classie.has( event.target, 'item' ) ) {
+      return;
+    }
+    // change size of item via class
+    classie.toggle( event.target, 'gigante' );
+    // trigger layout
+    msnry.layout();
+  });
+
+});
+</script>
+
+</head>
+<body>
+<h1>Masonry - layout</h1>
+<p>Click to toggle item size</p>
+<div class="masonry">
+  <div class="item"></div>
+  <div class="item w2 h2"></div>
+  <div class="item h3"></div>
+  <div class="item h2"></div>
+  <div class="item w3"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item h2"></div>
+  <div class="item w2 h3"></div>
+  <div class="item"></div>
+  <div class="item h2"></div>
+  <div class="item"></div>
+  <div class="item w2"></div>
+  <div class="item"></div>
+  <div class="item h2"></div>
+  <div class="item"></div>
+  <div class="item w3"></div>
+  <div class="item"></div>
+  <div class="item h2"></div>
+</div>
+
+
+
+</body>
+</html>
