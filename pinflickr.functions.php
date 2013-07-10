@@ -12,9 +12,22 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 	}
 	$url .= "&format=json";
 	$res = file_get_contents($url);
-	print_r($res);
+	// need to strip this invalid json callback crap
+	$dat = str_replace( 'jsonFlickrApi(', '', $res );
+	$dat = substr( $dat, 0, strlen( $dat ) - 1 ); //strip out last paren
+	$dat = json_decode($dat, TRUE);
+	return getFlickrUrls($dat);
+}
+
+function getFlickrUrls($dat){
+	foreach($dat['photos']['photo'] as $pic){  
+		$photo_url	  = 'http://farm' . $pic['farm'] . '.staticflickr.com/' . $pic['server'] . 
+						'/' . $pic['id'] . '_' . $pic['secret'] . ".jpg";
+		echo $photo_url . '<br />';
+	}
 }
 
 getFlickrData($SECRET, $API_KEY, "50453476@N08", "soccer");
 
 ?>
+
