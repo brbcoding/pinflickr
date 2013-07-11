@@ -11,7 +11,11 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 		$url .= "&tags=" . $tags;
 	}
 	$url .= "&format=json";
-	$res = file_get_contents($url);
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($curl, CURLOPT_URL, $url);
+	$res = curl_exec($curl);
+	curl_close($curl);
 	// need to strip this invalid json callback crap
 	$dat = str_replace( 'jsonFlickrApi(', '', $res );
 	$dat = substr( $dat, 0, strlen( $dat ) - 1 ); //strip out last paren
@@ -20,14 +24,15 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 }
 
 function getFlickrUrls($dat){
+	$urls = array();
 	foreach($dat['photos']['photo'] as $pic){  
 		$photo_url	  = 'http://farm' . $pic['farm'] . '.staticflickr.com/' . $pic['server'] . 
 						'/' . $pic['id'] . '_' . $pic['secret'] . ".jpg";
-		echo $photo_url . '<br />';
+		array_push($urls, $photo_url);
 	}
+	return $urls;
 }
 
-getFlickrData($SECRET, $API_KEY, "50453476@N08", "soccer");
 
 ?>
 
