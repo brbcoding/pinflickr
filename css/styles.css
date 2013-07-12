@@ -1,6 +1,13 @@
-#container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.pin {
+	margin: 0.5em;
+	padding: 0.5em;
+	box-shadow: 0 0 0.25em 0 black;
+	border-radius: 0.25em;
+	max-width: 15em;
 }
-
+/*
+.pin:hover {
+	transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+	box-shadow: 0 0 1em 0 black;
+}*/
