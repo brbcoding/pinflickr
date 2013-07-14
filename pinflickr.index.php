@@ -55,8 +55,7 @@ $json = json_encode($urls);
 			} else {
 				return;
 			}
-		});
-
+		}); 
 		// functions for animations
 		// turn the img a couple of degrees
 		var transform = function(){
