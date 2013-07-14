@@ -1,3 +1,4 @@
+/* pin design */
 .pin {
 	margin: 0.5em;
 	padding: 0.5em;
@@ -6,10 +7,13 @@
 	border-radius: 0.25em;
 	max-width: 15em;
 }
+
+/* for demo only */
 #selector {
 	width: 100%;
 }
 
+/* optional hover effects, triggered by jquery */
 .rotate:hover {
 	transform: rotate(3deg);
 	-webkit-transform: rotate(3deg);
@@ -18,3 +22,5 @@
 .subtle:hover {
 	box-shadow: 0 0 1em 0 #888888;
 }
+
+

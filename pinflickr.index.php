@@ -8,8 +8,9 @@ $json = json_encode($urls);
 <head>
 	<meta charset="UTF-8">
 	<title>pinflickr</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<link href='http://fonts.googleapis.com/css?family=Fauna+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/styles.css" type="text/css">
+	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Fauna+One' type='text/css'>
+	<link rel="stylesheet" href="fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
 	<style>
 	* { font-family: 'Fauna One', serif; }
 	</style>
@@ -22,9 +23,11 @@ $json = json_encode($urls);
 	</div>
 	<div id="container">
 	</div>
+</div>
 	<!--// get jquery //-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 	<script src="js/jquery.freetile.js"></script>
+	<script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js"></script>
 	<script>
 	$(document).ready(function(){
 		// get the json from our php file
@@ -32,7 +35,7 @@ $json = json_encode($urls);
 		
 		// add each picture to the existing #container
 		$.each(urlsArray, function(index, value, n){
-			$('#container').append('<div class="item"><img class="pin" src="' + value + '"></div>');
+			$('#container').append('<div class="item"><a class="fancybox" href="' + value +'"><img class="pin" src="' + value + '"></a></div>');
 		});
 
 		// call freetile on the container
@@ -40,8 +43,12 @@ $json = json_encode($urls);
 			animate: true,
 			elementDelay: 30
 		});
+		
+		// call fancybox on .pin
+		$('.fancybox').fancybox();
 
 
+		// invoke special hover functions upon hovering the .pin class
 		$('.pin').hover(function(){
 			// get the value of the checkbox -- just for demo
 			var sel = $('input:radio[name=selection]:checked').val();
@@ -56,16 +63,22 @@ $json = json_encode($urls);
 				return;
 			}
 		}); 
+
+
 		// functions for animations
+		// transform - rotate the image a couple of degrees
 		// turn the img a couple of degrees
 		var transform = function(){
 			$('.pin').toggleClass('rotate');
 		};
 
+		// add subtle shadow to the image
 		// put a simple subtle shadow around the image
 		var subtleHighlight = function(){
 			$('.pin').toggleClass('subtle');
 		};
+
+
 
 	});
 	</script>
