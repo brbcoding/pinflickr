@@ -42,7 +42,8 @@ $json = json_encode($urls);
 			$('#container').append('<div class="item"><a class="fancybox" href="' + 
 							value['url'] +'"><img class="pin" src="' + 
 							value['url'] + '" alt="' + 
-							value['title']+'"></a><br /><span class="image-title">' +
+							value['title']+'" title="' +
+							value['title'] +'"></a><br /><span class="image-title">' +
 							value['title'] + '</span></div>');
 		
 		});
