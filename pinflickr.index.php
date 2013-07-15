@@ -23,6 +23,7 @@ $json = json_encode($urls);
 	<input type="radio" name="selection" value="transform"> Rotate slightly on hover
 	<input type="radio" name="selection" value="subtle-highlight"> Subtle added shadow on hover
 	<input type="radio" name="selection" value="both"> Rotate + Shadow
+	<input type="radio" name="selection" value="grow"> Grow + Revert
 	</div>
 	<div id="container">
 	</div>
@@ -57,7 +58,6 @@ $json = json_encode($urls);
 		// call fancybox on .pin
 		$('.fancybox').fancybox();
 
-
 		// invoke special hover functions upon hovering the .pin class
 		$('.pin').hover(function(){
 			// get the value of the checkbox -- just for demo
@@ -66,6 +66,8 @@ $json = json_encode($urls);
 				transform();
 			} else if (sel == 'subtle-highlight'){
 				subtleHighlight();
+			} else if (sel == 'grow') {
+				grow();
 			} else if (sel == 'both') {
 				transform();
 				subtleHighlight();
@@ -73,7 +75,6 @@ $json = json_encode($urls);
 				return;
 			}
 		}); 
-
 
 		// functions for animations
 		// transform - rotate the image a couple of degrees
@@ -83,12 +84,14 @@ $json = json_encode($urls);
 		};
 
 		// add subtle shadow to the image
-		// put a simple subtle shadow around the image
 		var subtleHighlight = function(){
 			$('.item').toggleClass('subtle');
 		};
 
-
+		// scale a bit and return to normal size
+		var grow = function(){
+			$('.item').toggleClass('grow-shrink');
+		};
 
 	});
 	</script>
