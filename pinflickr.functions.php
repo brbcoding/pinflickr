@@ -10,6 +10,7 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 	if($tags != ""){
 		$url .= "&tags=" . $tags;
 	}
+	// format it as json
 	$url .= "&format=json";
 	$curl = curl_init();
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -20,6 +21,7 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 	$dat = str_replace( 'jsonFlickrApi(', '', $res );
 	$dat = substr( $dat, 0, strlen( $dat ) - 1 ); //strip out last paren
 	$dat = json_decode($dat, TRUE);
+	// return the decoded json response
 	return getFlickrUrls($dat);
 }
 

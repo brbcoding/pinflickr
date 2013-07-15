@@ -36,6 +36,7 @@ $json = json_encode($urls);
 	$(document).ready(function(){
 		// get the json from our php file
 		<?php echo "var urlsArray = " . $json . ";\n";?>
+
 		
 		console.log(urlsArray);
 		// add each picture to the existing #container
@@ -46,6 +47,7 @@ $json = json_encode($urls);
 							value['title']+'" title="' +
 							value['title'] +'"></a><br /><span class="image-title">' +
 							value['title'].substring(0, 33) + '...</span></div>');
+			
 			$('#container').freetile({
 				animate: true,
 				elementDelay: 30
