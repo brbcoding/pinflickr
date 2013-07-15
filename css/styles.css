@@ -15,6 +15,7 @@
 
 .image-title {
 	font-size: 0.75em;
+	max-width: 15em;
 }
 
 /* for demo only */
@@ -23,9 +24,14 @@
 }
 
 /* optional hover effects, triggered by jquery */
-.rotate:hover {
+.rotate:hover:nth-of-type(odd) {
 	transform: rotate(3deg);
 	-webkit-transform: rotate(3deg);
+}
+
+.rotate:hover:nth-of-type(even) {
+	transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
 }
 
 .subtle:hover {

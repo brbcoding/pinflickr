@@ -45,15 +45,19 @@ $json = json_encode($urls);
 							value['url'] + '" alt="' + 
 							value['title']+'" title="' +
 							value['title'] +'"></a><br /><span class="image-title">' +
-							value['title'] + '</span></div>');
-		
+							value['title'].substring(0, 33) + '...</span></div>');
+			$('#container').freetile({
+				animate: true,
+				elementDelay: 30
+			});
+
 		});
 
 		// call freetile on the container
-		$('#container').freetile({
-			animate: true,
-			elementDelay: 30
-		});
+		// $('#container').freetile({
+		// 	animate: true,
+		// 	elementDelay: 30
+		// });
 		
 		// call fancybox on .pin
 		$('.fancybox').fancybox();
