@@ -2,6 +2,9 @@
 include 'pinflickr.functions.php'; 
 $urls = getFlickrData($SECRET, $API_KEY, "50453476@N08", "soccer");
 $json = json_encode($urls);
+// echo '<pre>';
+// print_r($json);
+// echo '</pre>';
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,9 +36,15 @@ $json = json_encode($urls);
 		// get the json from our php file
 		<?php echo "var urlsArray = " . $json . ";\n";?>
 		
+		console.log(urlsArray);
 		// add each picture to the existing #container
-		$.each(urlsArray, function(index, value, n){
-			$('#container').append('<div class="item"><a class="fancybox" href="' + value +'"><img class="pin" src="' + value + '"></a></div>');
+		$.each(urlsArray, function(index, value){
+			$('#container').append('<div class="item"><a class="fancybox" href="' + 
+							value['url'] +'"><img class="pin" src="' + 
+							value['url'] + '" alt="' + 
+							value['title']+'"></a><br /><span class="image-title">' +
+							value['title'] + '</span></div>');
+		
 		});
 
 		// call freetile on the container
@@ -69,13 +78,13 @@ $json = json_encode($urls);
 		// transform - rotate the image a couple of degrees
 		// turn the img a couple of degrees
 		var transform = function(){
-			$('.pin').toggleClass('rotate');
+			$('.item').toggleClass('rotate');
 		};
 
 		// add subtle shadow to the image
 		// put a simple subtle shadow around the image
 		var subtleHighlight = function(){
-			$('.pin').toggleClass('subtle');
+			$('.item').toggleClass('subtle');
 		};
 
 

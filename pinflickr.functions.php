@@ -26,12 +26,20 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 // title is stored in $pic['title']
 function getFlickrUrls($dat){
 	$urls = array();
+	$nums = 0;
 	foreach($dat['photos']['photo'] as $pic){  
 		$photo_url	  = 'http://farm' . $pic['farm'] . '.staticflickr.com/' . $pic['server'] . 
 						'/' . $pic['id'] . '_' . $pic['secret'] . ".jpg";
-		array_push($urls, $photo_url);
-	}
 
+		// create a temporary array with the title and the photo's url
+		// 
+		$urls[$nums]['title'] = $pic['title'];		
+		$urls[$nums]['url'] = $photo_url;
+		$nums++;
+	}
+	// echo '<pre>';
+	// print_r($urls);
+	// echo '</pre>';
 	return $urls;
 }
 

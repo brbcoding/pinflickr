@@ -1,11 +1,19 @@
 /* pin design */
 .pin {
+	border: 0.5em #888888;
+	max-width: 15em;
+}
+
+.item {
 	margin: 0.5em;
 	padding: 0.5em;
-	box-shadow: 0 0 0.25em 0 #888888;
-	border: 0.5em white;
 	border-radius: 0.25em;
-	max-width: 15em;
+	box-shadow: 0 0 0.25em 0 #888888;
+	text-align: center;
+}
+
+.image-title {
+	font-size: 0.75em;
 }
 
 /* for demo only */
@@ -22,5 +30,4 @@
 .subtle:hover {
 	box-shadow: 0 0 1em 0 #888888;
 }
-
 
