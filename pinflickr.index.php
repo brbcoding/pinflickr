@@ -46,21 +46,21 @@ $json = json_encode($urls);
 							value['url'] + '" alt="' + 
 							value['title']+'" title="' +
 							value['title'] +'"></a><br /><span class="image-title">' +
+							// this is not how we actually want to handle overflow
 							value['title'].substring(0, 33) + '...</span></div>');
 			
-			$('#container').freetile({
-				animate: true,
-				elementDelay: 30
-			});
 
 		});
+		// call freetile immediately
+		$('#container').freetile();
+		// call freetile on window resize
+		$(window).resize(function(){
+			$('#container').freetile({
+			animate: true,
+			elementDelay: 5
+			});
+		})
 
-		// call freetile on the container
-		// $('#container').freetile({
-		// 	animate: true,
-		// 	elementDelay: 30
-		// });
-		
 		// call fancybox on .pin
 		$('.fancybox').fancybox();
 

@@ -29,19 +29,18 @@ function getFlickrData($SECRET, $API_KEY, $user_id, $tags) {
 function getFlickrUrls($dat){
 	$urls = array();
 	$nums = 0;
-	foreach($dat['photos']['photo'] as $pic){  
-		$photo_url	  = 'http://farm' . $pic['farm'] . '.staticflickr.com/' . $pic['server'] . 
-						'/' . $pic['id'] . '_' . $pic['secret'] . ".jpg";
-
-		// create a temporary array with the title and the photo's url
-		// 
-		$urls[$nums]['title'] = $pic['title'];		
-		$urls[$nums]['url'] = $photo_url;
-		$nums++;
+	if($dat){
+		foreach($dat['photos']['photo'] as $pic){  
+			$photo_url	  = 'http://farm' . $pic['farm'] . '.staticflickr.com/' . $pic['server'] . 
+							'/' . $pic['id'] . '_' . $pic['secret'] . ".jpg";
+			// create a temporary array with the title and the photo's url
+			$urls[$nums]['title'] = $pic['title'];		
+			$urls[$nums]['url'] = $photo_url;
+			$nums++;
+		}
+	} else {
+		echo "Flickr Was Unreachable.";
 	}
-	// echo '<pre>';
-	// print_r($urls);
-	// echo '</pre>';
 	return $urls;
 }
 
