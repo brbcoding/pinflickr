@@ -1,5 +1,6 @@
 <?php
 
+// keys should come from an admin page on the wp version
 $API_KEY = "ffdc6e7cef69d201a7c79bc80477a0ec"; // change this when in prod
 $SECRET	 = "a48a5c5114b7ec99"; // change this in prod too
 

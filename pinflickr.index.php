@@ -1,6 +1,6 @@
 <?php 
 include 'pinflickr.functions.php'; 
-$urls = getFlickrData($SECRET, $API_KEY, "50453476@N08", "soccer");
+$urls = getFlickrData($SECRET, $API_KEY, "50453476@N08", "football");
 $json = json_encode($urls);
 // echo '<pre>';
 // print_r($json);
