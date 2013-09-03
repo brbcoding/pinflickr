@@ -1,0 +1,75 @@
+/* pin design */
+.pin {
+	border: 0.5em #888888;
+	width: 100%;
+	border-radius: 0.25em;
+}
+
+.item {
+	margin: 0.5em;
+	padding: 0.5em;
+	border-radius: 0.25em;
+	box-shadow: 0 0 0.25em 0 #888888;
+	text-align: center;
+	width: 15em;
+}
+
+.image-title {
+	font-size: 0.75em;
+	padding-bottom: 0.5em;
+}
+
+/* for demo only */
+#selector {
+	width: 100%;
+}
+
+#container {
+	max-width: 1200px;
+}
+/* optional hover effects, triggered by jquery */
+.rotate:hover:nth-of-type(odd) {
+	transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+}
+
+.rotate:hover:nth-of-type(even) {
+	transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+}
+
+.subtle:hover {
+	box-shadow: 0 0 1em 0 #888888;
+}
+
+.grow-shrink:hover {
+	animation: grow-shrink 1s ease;
+	-webkit-animation: grow-shrink 1s ease;
+
+}
+
+#
+
+@keyframes grow-shrink {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@-webkit-keyframes grow-shrink {
+	0% {
+		-webkit-transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(1.1);
+	}
+	100% {
+		-webkit-transform: scale(1);
+	}
+}
