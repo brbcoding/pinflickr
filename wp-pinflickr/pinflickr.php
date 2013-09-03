@@ -18,21 +18,28 @@ function pinflickr_install() {
 register_activation_hook(__FILE__, 'pinflickr_install');
 
 // load the required scripts
-function pinflickr_javascripts() {
+function pinflickr_includes() {
 	// register the scripts first, then we will enqueue them
 	wp_register_script('jquery-1.10.2', plugin_dir_url(__FILE__) . 'js/jquery-1.10.2.min.js');
 	wp_register_script('freetile_js', plugin_dir_url(__FILE__) . 'js/jquery.freetile.js');
-	wp_register_script('fancybox', plugin_dir_url(__FILE__) . 'js/fancybox/source/jquery.fancybox.pack.js');
+	wp_register_script('fancybox_js', plugin_dir_url(__FILE__) . 'js/fancybox/source/jquery.fancybox.js');
+	wp_register_script('fancybox_pack', plugin_dir_url(__FILE__) . 'js/fancybox/source/jquery.fancybox.pack.js');
 	wp_register_script('pinflickr_js', plugin_dir_url(__FILE__) . 'js/pinflickr.js');
 	wp_enqueue_script('jquery-1.10.2');
-	wp_enqueue_script('pinflickr_js');
 	wp_enqueue_script('freetile_js');
+	wp_enqueue_script('pinflickr_js');
+	wp_enqueue_script('fancybox_js');
+	wp_enqueue_script('fancybox_pack');
 
 	wp_register_style('pinflickr_styles', plugin_dir_url(__FILE__) . 'css/styles.css');
 	wp_enqueue_style('pinflickr_styles');
+
+
+	wp_register_style('fancybox_styles', plugin_dir_url(__FILE__) . 'js/fancybox/source/jquery.fancybox.css');
+	wp_enqueue_style('fancybox_styles');
 }
 
-add_action('wp_enqueue_scripts', 'pinflickr_javascripts');
+add_action('wp_enqueue_scripts', 'pinflickr_includes');
 
 
 // hooks
