@@ -25,4 +25,4 @@ The easiest way to find a user id is by using the site [idGettr](http://idgettr.
 - Enter the shortcode with your `user_id` and desired `tags` and save this page.  
 - That's it! You've created an awesome pinboard styled gallery! 
 
-*Working Demo Coming Soon*
+[Simple Working Demo](http://oh.lc/wordpress/pinflickr-gallery/)
