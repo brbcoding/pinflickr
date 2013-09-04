@@ -9,14 +9,150 @@ Author URI: http://codyhenshaw.com
 License: WTFPL
 */
 
-// setup
+// define('WP_DEBUG', true);
+class PinflickrSettingsPage
+{
+    /**
+     * Holds the values to be used in the fields callbacks
+     */
+    private $options;
 
-function pinflickr_install() {
-	// do some installation work
+    /**
+     * Start up
+     */
+    public function __construct()
+    {
+        add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
+        add_action( 'admin_init', array( $this, 'page_init' ) );
+    }
+
+    /**
+     * Add options page
+     */
+    public function add_plugin_page()
+    {
+        // This page will be under "Settings"
+        add_options_page(
+            'Pinflickr Admin', 
+            'Pinflickr Settings', 
+            'manage_options', 
+            'pinflickr-admin', 
+            array( $this, 'create_admin_page' )
+        );
+    }
+
+    /**
+     * Options page callback
+     */
+    public function create_admin_page()
+    {
+        // Set class property
+        $this->options = get_option( 'pinflickr_options_name' );
+        ?>
+        <div class="wrap">
+            <?php screen_icon(); ?>
+            <h2>Pinflickr Settings</h2>           
+            <form method="post" action="options.php">
+            <?php
+                // This prints out all hidden setting fields
+                settings_fields( 'pinflickr_options_group' );   
+                do_settings_sections( 'pinflickr-admin' );
+                submit_button(); 
+            ?>
+            </form>
+        </div>
+        <?php
+    }
+
+    /**
+     * Register and add settings
+     */
+    public function page_init()
+    {        
+        register_setting(
+            'pinflickr_options_group', // Option group
+            'pinflickr_options_name', // Option name
+            array( $this, 'sanitize' ) // Sanitize
+        );
+
+        add_settings_section(
+            'setting_section_id', // ID
+            'My Custom Settings', // Title
+            array( $this, 'print_section_info' ), // Callback
+            'pinflickr-admin' // Page
+        );  
+
+        add_settings_field(
+            'api_key', // ID
+            'API Key', // Title
+            array( $this, 'api_key_callback' ), // Callback
+            'pinflickr-admin', // Page
+            'setting_section_id' // Section           
+        );      
+
+        add_settings_field(
+            'app_secret', 
+            'App Secret', 
+            array( $this, 'app_secret_callback' ), 
+            'pinflickr-admin', 
+            'setting_section_id'
+        );      
+    }
+
+    /**
+     * Sanitize each setting field as needed
+     *
+     * @param array $input Contains all settings fields as array keys
+     */
+    public function sanitize( $input )
+    {
+
+        if( !empty( $input['app_secret'] ) )
+            $input['app_secret'] = sanitize_text_field( $input['app_secret'] );
+
+        return $input;
+    }
+
+    /** 
+     * Print the Section text
+     */
+    public function print_section_info()
+    {
+        print 'Enter your settings below:';
+    }
+
+    /** 
+     * Get the settings option array and print one of its values
+     */
+    public function api_key_callback()
+    {
+        printf(
+            '<input type="text" id="api_key" name="pinflickr_options_name[api_key]" value="%s" />',
+            esc_attr( $this->options['api_key'])
+        );
+    }
+
+    /** 
+     * Get the settings option array and print one of its values
+     */
+    public function app_secret_callback()
+    {
+        printf(
+            '<input type="text" id="app_secret" name="pinflickr_options_name[app_secret]" value="%s" />',
+            esc_attr( $this->options['app_secret'])
+        );
+    }
 }
 
-register_activation_hook(__FILE__, 'pinflickr_install');
+if( is_admin() ) {
+    $my_settings_page = new PinflickrSettingsPage();
+}
 
+
+function pinflickr_install() {
+
+
+}
 // load the required scripts
 function pinflickr_includes() {
 	// register the scripts first, then we will enqueue them
@@ -47,10 +183,24 @@ add_action('init', 'pinflickr_init');
 /***************************************************************************************/
 /* SHORTCODES
 ****************************************************************************************/
-function pinflickr_shortcode() {
-	$API_KEY = "ffdc6e7cef69d201a7c79bc80477a0ec"; // change this when in prod
-	$SECRET	 = "a48a5c5114b7ec99"; // change this in prod too
-  	echo getFlickrData($SECRET, $API_KEY, "50453476@N08", "football");
+
+// pass tags and user as the parms of the shortcode
+function pinflickr_shortcode( $attrs ) {
+
+  // get the options from our options page
+  $opts    = get_option('pinflickr_options_name');
+  $API_KEY = $opts['api_key']; // change this when in prod
+  $SECRET  = $opts['app_secret']; // change this in prod too
+  $user    = $attrs['user_id'];
+  $tags    = $attrs['tags'];
+
+  // store our output for error checking
+  $output  = getFlickrData($SECRET, $API_KEY, $user, $tags);
+  if($output) {
+    echo $output;
+  } else {
+    echo 'No Data Available';
+  }
 }
 
 add_shortcode('pinflickr', 'pinflickr_shortcode');
@@ -136,4 +286,5 @@ function buildPinflickrHtml($urls) {
 	}
 
 }
+
 ?>
