@@ -4,9 +4,8 @@ pinflickr
 This plugin uses the Flickr API to build a pinboard style gallery on an existing Wordpress site.
 
 Examples:  
-![Example](http://i.imgur.com/MeLPgwS.jpg)  
-![Hover Effects](http://i.imgur.com/kWLfot7.jpg)  
-![Popup](http://i.imgur.com/JfnB6FG.jpg)  
+![Screenshot 1](http://i.imgur.com/DxAHfvp.jpg)
+![Screenshot 2](http://i.imgur.com/vzB3ljs.jpg)
 
 Installation
 ==  
